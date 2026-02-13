@@ -123,14 +123,14 @@ const SCHEDULE_DATA: Record<string, { en: any[], mr: any[] }> = {
     en: [
       { time: "6:00 AM", event: "Baraat Procession", location: "Starts from Hinganghat", icon: MapPin },
       { time: "9:00 AM - 11:30 AM", event: "Arrival at Bride's Mandap (Band & Dhumal)", location: "Chandrapur", icon: Music },
-      { time: "11:45 AM", event: "The Royal Passage", location: "Shakuntala Hall, Chandrapur", icon: Music },
-      { time: "12:30 PM", event: "Divine Moment (Wedding)", location: "Shakuntala Hall, Chandrapur", icon: Heart },
+      { time: "11:30 AM", event: "The Royal Passage", location: "Shakuntala Hall, Chandrapur", icon: Music },
+      { time: "11:45 AM", event: "Divine Moment (Wedding)", location: "Shakuntala Hall, Chandrapur", icon: Heart },
     ],
     mr: [
       { time: "सकाळी ६:००", event: "वरात प्रस्थान", location: "हिंगणघाट वरून", icon: MapPin },
       { time: "सकाळी ९:०० - ११:३०", event: "वधू मंडपी आगमन (बँड आणि धुमाल)", location: "चंद्रपूर", icon: Music },
-      { time: "सकाळी ११:४५", event: "रॉयल एन्ट्री", location: "शकुंतला हॉल, चंद्रपूर", icon: Music },
-      { time: "दुपारी १२:३०", event: "शुभ विवाह", location: "शकुंतला हॉल, चंद्रपूर", icon: Heart },
+      { time: "सकाळी ११:३०", event: "रॉयल एन्ट्री", location: "शकुंतला हॉल, चंद्रपूर", icon: Music },
+      { time: "सकाळी ११:४५", event: "शुभ विवाह", location: "शकुंतला हॉल, चंद्रपूर", icon: Heart },
     ]
   },
   "26": {
