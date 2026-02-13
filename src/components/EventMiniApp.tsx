@@ -4,19 +4,9 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  CalendarDays,
-  UtensilsCrossed,
-  Gift,
-  MapPin,
-  Clock,
-  Music,
-  Heart,
-  Sun,
-  Star,
-  Shirt,
-  Sparkles,
-  Languages
-} from "lucide-react";
+  MapPin, Clock, Calendar, Heart, Music, Phone, Share2, Navigation,
+  UtensilsCrossed, ExternalLink, Shirt, Sun, Star, Sparkles, Languages, Gift, Home
+} from 'lucide-react';
 
 // --- Configuration & Data ---
 
@@ -29,7 +19,7 @@ const DAYS = [
 
 const UI_TEXT = {
   header_sub: { en: "GAVASKAR FAMILY PRESENTS", mr: "गावस्कर परिवार प्रस्तुत" },
-  header_title: { en: "Atul & Vaishnavi", mr: "अतुल आणि वैष्णवी" },
+  header_title: { en: "Atul & Vaishnavi", mr: "अतुल संग वैष्णवी" },
   location_short: { en: "Hinganghat • Chandrapur", mr: "हिंगणघाट • चंद्रपूर" },
   tabs: {
     schedule: { en: "schedule", mr: "वेळापत्रक" },
@@ -49,37 +39,37 @@ const UI_TEXT = {
 const SCHEDULE_DATA: Record<string, { en: any[], mr: any[] }> = {
   "23": {
     en: [
-      { time: "10:00 AM", event: "Inauguration Program", location: "Gavaskar Niwas", icon: Sun },
-      { time: "11:00 AM", event: "Daayka Program", location: "Gavaskar Niwas", icon: Sun },
+      { time: "10:00 AM", event: "Inauguration Program", location: "Gavaskar Niwas, Hinganghat", icon: Sun },
+      { time: "11:00 AM", event: "Daayka Program", location: "Gavaskar Niwas, Hinganghat", icon: Sun },
       {
         time: "1:00 PM",
         event: "Mehendi Ceremony",
-        location: "Gavaskar Niwas",
+        location: "Gavaskar Niwas, Hinganghat",
         icon: Heart,
         note: "Attire: Mehendi Shirt / Mehendi Saree"
       },
       {
         time: "8:00 PM",
         event: "Sangeet Night",
-        location: "Gavaskar Niwas",
+        location: "Gavaskar Niwas, Hinganghat",
         icon: Music,
         note: "Join us for a night of music & dance!"
       },
     ],
     mr: [
-      { time: "सकाळी १०:००", event: "उद्घाटन कार्यक्रम", location: "गावस्कर निवास", icon: Sun },
-      { time: "सकाळी ११:००", event: "दायका कार्यक्रम", location: "गावस्कर निवास", icon: Sun },
+      { time: "सकाळी १०:००", event: "उद्घाटन कार्यक्रम", location: "गावस्कर निवास, हिंगणघाट", icon: Sun },
+      { time: "सकाळी ११:००", event: "डायका कार्यक्रम", location: "गावस्कर निवास, हिंगणघाट", icon: Sun },
       {
         time: "दुपारी १:००",
         event: "मेहंदी सोहळा",
-        location: "गावस्कर निवास",
+        location: "गावस्कर निवास, हिंगणघाट",
         icon: Heart,
         note: "वेशभूषा: मेहंदी शर्ट / मेहंदी साडी"
       },
       {
         time: "रात्री ८:००",
         event: "संगीत संध्या",
-        location: "गावस्कर निवास",
+        location: "गावस्कर निवास, हिंगणघाट",
         icon: Music,
         note: "संगीत आणि नृत्याच्या रात्रीत सामील व्हा!"
       },
@@ -90,14 +80,14 @@ const SCHEDULE_DATA: Record<string, { en: any[], mr: any[] }> = {
       {
         time: "11:00 AM",
         event: "Haldi Puja",
-        location: "Gavaskar Niwas",
+        location: "Gavaskar Niwas, Hinganghat",
         icon: Sun,
         note: "Attire: Women - Ulta Pallu Saree"
       },
       {
         time: "3:00 PM",
         event: "Haldi & DJ",
-        location: "Gavaskar Niwas",
+        location: "Gavaskar Niwas, Hinganghat",
         icon: Music,
         note: "Attire: Men - Yellow Kurta | Women - Nauvari"
       },
@@ -106,14 +96,14 @@ const SCHEDULE_DATA: Record<string, { en: any[], mr: any[] }> = {
       {
         time: "सकाळी ११:००",
         event: "हळदी समारंभ",
-        location: "गावस्कर निवास",
+        location: "गावस्कर निवास, हिंगणघाट",
         icon: Sun,
         note: "वेशभूषा: महिला - उलटा पदर साडी"
       },
       {
         time: "दुपारी ३:००",
         event: "हळद आणि डीजे",
-        location: "गावस्कर निवास",
+        location: "गावस्कर निवास, हिंगणघाट",
         icon: Music,
         note: "वेशभूषा: पुरुष - पिवळा कुर्ता | महिला - नऊवारी"
       },
@@ -138,22 +128,22 @@ const SCHEDULE_DATA: Record<string, { en: any[], mr: any[] }> = {
       {
         time: "8:00 AM",
         event: "Foam Party & DJ",
-        location: "Gavaskar Niwas",
+        location: "Gavaskar Niwas, Hinganghat",
         icon: Music,
         note: "Attire: Printed Shirts / Dresses"
       },
-      { time: "11:00 AM", event: "Satyanarayan Puja", location: "Gavaskar Niwas", icon: Star },
+      { time: "11:00 AM", event: "Satyanarayan Puja", location: "Gavaskar Niwas, Hinganghat", icon: Star },
       { time: "7:00 PM", event: "Grand Reception", location: "Nakshatra Lawn, Hinganghat", icon: Sparkles },
     ],
     mr: [
       {
         time: "सकाळी ८:००",
         event: "फोम पार्टी आणि डीजे",
-        location: "गावस्कर निवास",
+        location: "गावस्कर निवास, हिंगणघाट",
         icon: Music,
         note: "वेशभूषा: प्रिंटेड शर्ट्स / ड्रेस"
       },
-      { time: "सकाळी ११:००", event: "सत्यनारायण पूजा", location: "गावस्कर निवास", icon: Star },
+      { time: "सकाळी ११:००", event: "सत्यनारायण पूजा", location: "गावस्कर निवास, हिंगणघाट", icon: Star },
       { time: "संध्याकाळी ७:००", event: "स्वागत समारंभ (रिसेप्शन)", location: "नक्षत्र लॉन, हिंगणघाट", icon: Sparkles },
     ]
   },
@@ -300,6 +290,57 @@ export default function EventMiniApp() {
 
   return (
     <section className="min-h-screen bg-slate-50 flex flex-col items-center font-body pb-40">
+      {/* Wedding-themed animated confetti */}
+      {[...Array(12)].map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{ y: -40, opacity: 0, x: (i % 2 === 0 ? -1 : 1) * (30 + 20 * (i % 3)), rotate: 0 }}
+          animate={{
+            y: [0, 600],
+            opacity: [1, 1, 0],
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 7 + (i % 4),
+            repeat: Infinity,
+            repeatType: "loop",
+            delay: i * 0.7
+          }}
+          className={`pointer-events-none fixed z-0 left-[${5 + i * 7}%] top-0`}
+          style={{ left: `${5 + i * 7}%` }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill={i%3===0?"#FFD700":i%3===1?"#E75480":"#A020F0"} stroke="none"><circle cx="12" cy="12" r="7" /></svg>
+        </motion.div>
+      ))}
+      {/* Floating animated hearts */}
+      {[...Array(6)].map((_, i) => (
+        <motion.div
+          key={"heart"+i}
+          initial={{ y: 600, opacity: 0, x: 20 + i * 100, scale: 0.7 }}
+          animate={{
+            y: [600, 100, 0],
+            opacity: [0, 0.7, 0],
+            scale: [0.7, 1.1, 0.7],
+          }}
+          transition={{
+            duration: 8 + i,
+            repeat: Infinity,
+            repeatType: "loop",
+            delay: i * 1.2
+          }}
+          className="pointer-events-none fixed z-0"
+          style={{ left: `${10 + i * 12}%`, bottom: 0 }}
+        >
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#E75480" stroke="none"><path d="M12 21C12 21 4 13.5 4 8.5C4 5.42 6.42 3 9.5 3C11.04 3 12.5 3.99 13.07 5.36C13.64 3.99 15.1 3 16.64 3C19.72 3 22.14 5.42 22.14 8.5C22.14 13.5 12 21 12 21Z"/></svg>
+        </motion.div>
+      ))}
+
+      {/* Animated entrance for header */}
+      <motion.div
+        initial={{ opacity: 0, y: -60 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, type: "spring", stiffness: 80 }}
+      >
 
       {/* --- Dynamic Header / Hero Section --- */}
       <motion.header
@@ -345,10 +386,17 @@ export default function EventMiniApp() {
         >
           {lang === 'en' ? 'अ' : 'En'}
         </button>
+
       </motion.header>
+      </motion.div>
 
       {/* --- Tab Navigation (Floating Glass) --- */}
-      <div className="w-full max-w-md sticky top-4 z-20 px-4 mt-[-1.5rem]">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.3, type: "spring", stiffness: 60 }}
+        className="w-full max-w-md sticky top-4 z-20 px-4 mt-[-1.5rem]"
+      >
         <nav className="flex p-1.5 glass rounded-full shadow-glass backdrop-blur-md bg-white/60 border border-white/40">
           {["schedule", "menu", "gift"].map((tab) => (
             <button
@@ -360,6 +408,9 @@ export default function EventMiniApp() {
                 <motion.div
                   layoutId="active-pill"
                   className={`absolute inset-0 rounded-full shadow-sm ${currentTheme.bg}`}
+                  initial={{ scale: 0.7, opacity: 0.7 }}
+                  animate={{ scale: 1.1, opacity: 1 }}
+                  transition={{ type: "spring", stiffness: 200, damping: 15 }}
                 />
               )}
               <span className={`relative z-10 transition-colors ${activeTab === tab ? "text-white" : "hover:text-slate-800"}`}>
@@ -368,7 +419,7 @@ export default function EventMiniApp() {
             </button>
           ))}
         </nav>
-      </div>
+      </motion.div>
 
       <div className="w-full max-w-md flex-1 px-4 mt-8 pb-24">
         <AnimatePresence mode="wait">
@@ -399,7 +450,13 @@ export default function EventMiniApp() {
                       }`}
                   >
                     {activeDay === day.id && (
-                      <motion.div layoutId="activeDayDot" className="absolute top-1.5 right-1.5 w-1 h-1 bg-white rounded-full" />
+                      <motion.div
+                        layoutId="activeDayDot"
+                        className="absolute top-1.5 right-1.5 w-1 h-1 bg-white rounded-full"
+                        initial={{ scale: 0.5, opacity: 0.5 }}
+                        animate={{ scale: [1, 1.4, 1], opacity: [0.5, 1, 0.5] }}
+                        transition={{ duration: 1.2, repeat: Infinity, repeatType: "loop" }}
+                      />
                     )}
                     <span className="text-[9px] font-bold uppercase tracking-widest opacity-80 mb-0.5">{day.day}</span>
                     <span className="text-lg font-heading font-bold leading-none">{day.id}</span>
@@ -485,7 +542,13 @@ export default function EventMiniApp() {
                       }`}
                   >
                     {activeDay === day.id && (
-                      <motion.div layoutId="activeMenuDayDot" className="absolute top-1.5 right-1.5 w-1 h-1 bg-white rounded-full" />
+                      <motion.div
+                        layoutId="activeMenuDayDot"
+                        className="absolute top-1.5 right-1.5 w-1 h-1 bg-white rounded-full"
+                        initial={{ scale: 0.5, opacity: 0.5 }}
+                        animate={{ scale: [1, 1.4, 1], opacity: [0.5, 1, 0.5] }}
+                        transition={{ duration: 1.2, repeat: Infinity, repeatType: "loop" }}
+                      />
                     )}
                     <span className="text-[9px] font-bold uppercase tracking-widest opacity-80 mb-0.5">{day.day}</span>
                     <span className="text-lg font-heading font-bold leading-none">{day.id}</span>
@@ -548,6 +611,111 @@ export default function EventMiniApp() {
         </AnimatePresence>
       </div>
 
+      {/* Venue Locations */}
+      <div className="mt-10 px-4 mb-8">
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <div className="h-px w-8 bg-wedding-gold/30"></div>
+          <h3 className="text-center text-xs font-black uppercase tracking-widest text-amber-900/60">Event Venues</h3>
+          <div className="h-px w-8 bg-wedding-gold/30"></div>
+        </div>
+
+        <div className="space-y-4">
+          {/* Gavaskar Niwas */}
+          <a href="https://maps.app.goo.gl/5BfZmY1vRgmkazb26" target="_blank" rel="noopener noreferrer"
+            className="group relative block bg-white p-4 rounded-2xl border border-wedding-gold/30 shadow-sm hover:shadow-lg hover:border-wedding-gold transition-all duration-300 overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-amber-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform" />
+
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-100 to-amber-50 flex items-center justify-center shrink-0 border border-amber-100 shadow-inner text-amber-700">
+                <Home size={22} />
+              </div>
+              <div className="flex-1">
+                <h4 className="font-heading font-bold text-slate-800 text-lg leading-tight group-hover:text-amber-700 transition-colors">Gavaskar Niwas</h4>
+                <p className="text-xs text-slate-500 font-medium">Hinganghat</p>
+              </div>
+              <div className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-amber-600 group-hover:text-white group-hover:border-amber-600 transition-all shadow-sm">
+                <Navigation size={18} />
+              </div>
+            </div>
+          </a>
+
+          {/* Shakuntala Hall */}
+          <a href="https://maps.app.goo.gl/G6X1frKYNe6hvrHGA" target="_blank" rel="noopener noreferrer"
+            className="group relative block bg-white p-4 rounded-2xl border border-wedding-gold/30 shadow-sm hover:shadow-lg hover:border-wedding-gold transition-all duration-300 overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-rose-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform" />
+
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-rose-100 to-rose-50 flex items-center justify-center shrink-0 border border-rose-100 shadow-inner text-rose-700">
+                <Music size={22} />
+              </div>
+              <div className="flex-1">
+                <h4 className="font-heading font-bold text-slate-800 text-lg leading-tight group-hover:text-rose-700 transition-colors">Shakuntala Hall</h4>
+                <p className="text-xs text-slate-500 font-medium">Chandrapur</p>
+              </div>
+              <div className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-rose-600 group-hover:text-white group-hover:border-rose-600 transition-all shadow-sm">
+                <Navigation size={18} />
+              </div>
+            </div>
+          </a>
+
+          {/* Nakshatra Lawn */}
+          <a href="https://maps.app.goo.gl/FjRe1v8vFpXrRJxD8" target="_blank" rel="noopener noreferrer"
+            className="group relative block bg-white p-4 rounded-2xl border border-wedding-gold/30 shadow-sm hover:shadow-lg hover:border-wedding-gold transition-all duration-300 overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-50 rounded-bl-full -mr-4 -mt-4 opacity-50 group-hover:scale-110 transition-transform" />
+
+            <div className="flex items-center gap-4 relative z-10">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-100 to-emerald-50 flex items-center justify-center shrink-0 border border-emerald-100 shadow-inner text-emerald-700">
+                <Sparkles size={22} />
+              </div>
+              <div className="flex-1">
+                <h4 className="font-heading font-bold text-slate-800 text-lg leading-tight group-hover:text-emerald-700 transition-colors">Nakshatra Lawn</h4>
+                <p className="text-xs text-slate-500 font-medium">Hinganghat</p>
+              </div>
+              <div className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-all shadow-sm">
+                <Navigation size={18} />
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="py-8 text-center flex justify-center">
+        <a
+          href="https://kshanikadigital.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex flex-col items-center gap-2 hover:scale-110 transition-transform duration-300"
+        >
+          <div className="w-8 h-8 relative">
+            <Image
+              src="/logo-k.png"
+              alt="Kshanika Digital"
+              fill
+              className="object-contain"
+            />
+            {/* Animated Sparkles */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.7, rotate: 0 }}
+              animate={{
+                opacity: [0.7, 1, 0.7],
+                scale: [0.7, 1.2, 0.7],
+                rotate: [0, 20, -20, 0],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                repeatType: "loop",
+                ease: "easeInOut"
+              }}
+              className="absolute -top-2 -right-2 text-yellow-400 drop-shadow-lg pointer-events-none"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.07-7.07-1.41 1.41M6.34 17.66l-1.41 1.41m12.02 0-1.41-1.41M6.34 6.34 4.93 4.93"/><circle cx="12" cy="12" r="4"/></svg>
+            </motion.div>
+          </div>
+          <span className="text-xs font-semibold text-slate-500">Kshanika Digital</span>
+        </a>
+      </footer>
     </section>
   );
 }
@@ -685,6 +853,12 @@ function LiveRitualTracker({ day, lang, currentTheme }: { day: string, lang: "en
             {displayEvent.event}
           </h3>
           <div className="flex items-center gap-2 text-xs text-slate-500 mt-1 font-medium">
+            <Calendar size={12} />
+            <span>
+              {new Date(displayEvent.startTime).toLocaleDateString(lang === 'mr' ? 'mr-IN' : 'en-US', { month: 'short', day: 'numeric' })}
+            </span>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5 font-medium">
             <Clock size={12} />
             <span>{displayEvent.time}</span>
           </div>
