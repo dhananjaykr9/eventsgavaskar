@@ -320,12 +320,12 @@ export default function EventMiniApp() {
           <motion.p className={`text-[10px] font-black uppercase tracking-[0.4em] mb-2 text-wedding-gold/90`}>
             {t("header_sub")}
           </motion.p>
-          <motion.h1 className={`text-5xl font-heading text-wedding-cream mb-2 drop-shadow-sm`}>
+          <motion.p className={`text-sm font-heading italic text-wedding-cream/80 mb-1`}>
+            {lang === 'en' ? 'Wedding of' : 'शुभ विवाह'}
+          </motion.p>
+          <motion.h1 className={`text-5xl font-heading text-wedding-cream mb-6 drop-shadow-sm`}>
             {t("header_title")}
           </motion.h1>
-          <motion.p className={`text-lg font-heading text-wedding-gold mb-4 tracking-widest`}>
-            {lang === 'en' ? 'Wedding' : 'शुभ विवाह'}
-          </motion.p>
 
           <div className={`inline-flex items-center gap-2 px-5 py-2 rounded-full bg-black/10 backdrop-blur-sm border border-white/10 text-wedding-cream/90 text-[10px] font-bold uppercase tracking-widest mb-6`}>
             <MapPin size={12} className="text-wedding-gold" /> {t("location_short")}
