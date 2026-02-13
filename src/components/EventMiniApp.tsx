@@ -28,7 +28,7 @@ const DAYS = [
 ];
 
 const UI_TEXT = {
-  header_sub: { en: "GAVASKAR PARIVAR PRESENTS", mr: "गावस्कर परिवार प्रस्तुत" },
+  header_sub: { en: "GAVASKAR FAMILY PRESENTS", mr: "गावस्कर परिवार प्रस्तुत" },
   header_title: { en: "Atul & Vaishnavi", mr: "अतुल आणि वैष्णवी" },
   location_short: { en: "Hinganghat • Chandrapur", mr: "हिंगणघाट • चंद्रपूर" },
   tabs: {
@@ -138,23 +138,23 @@ const SCHEDULE_DATA: Record<string, { en: any[], mr: any[] }> = {
       {
         time: "8:00 AM",
         event: "Foam Party & DJ",
-        location: "Nakshatra Lawn",
+        location: "Gavaskar Niwas",
         icon: Music,
         note: "Attire: Printed Shirts / Dresses"
       },
       { time: "11:00 AM", event: "Satyanarayan Puja", location: "Gavaskar Niwas", icon: Star },
-      { time: "7:00 PM", event: "Grand Reception", location: "Nakshatra Lawn", icon: Sparkles },
+      { time: "7:00 PM", event: "Grand Reception", location: "Nakshatra Lawn, Hinganghat", icon: Sparkles },
     ],
     mr: [
       {
         time: "सकाळी ८:००",
         event: "फोम पार्टी आणि डीजे",
-        location: "नक्षत्र लॉन",
+        location: "गावस्कर निवास",
         icon: Music,
         note: "वेशभूषा: प्रिंटेड शर्ट्स / ड्रेस"
       },
       { time: "सकाळी ११:००", event: "सत्यनारायण पूजा", location: "गावस्कर निवास", icon: Star },
-      { time: "संध्याकाळी ७:००", event: "स्वागत समारंभ (रिसेप्शन)", location: "नक्षत्र लॉन", icon: Sparkles },
+      { time: "संध्याकाळी ७:००", event: "स्वागत समारंभ (रिसेप्शन)", location: "नक्षत्र लॉन, हिंगणघाट", icon: Sparkles },
     ]
   },
 };
@@ -317,6 +317,9 @@ export default function EventMiniApp() {
         </div>
 
         <motion.div className="relative z-10">
+          <motion.p className={`text-base font-heading italic text-wedding-gold mb-4`}>
+            {lang === 'en' ? 'Welcome Guest' : 'सुस्वागतम'}
+          </motion.p>
           <motion.p className={`text-[10px] font-black uppercase tracking-[0.4em] mb-2 text-wedding-gold/90`}>
             {t("header_sub")}
           </motion.p>
@@ -379,6 +382,9 @@ export default function EventMiniApp() {
               exit={{ opacity: 0, x: 20 }}
               className="space-y-6"
             >
+              {/* Live Muhurta Tracking */}
+              <LiveRitualTracker day={activeDay} lang={lang} currentTheme={currentTheme} />
+
               {/* Day Selector */}
               {/* Day Selector - Elegant Shapes */}
               {/* Day Selector - Elegant Shapes */}
@@ -387,17 +393,17 @@ export default function EventMiniApp() {
                   <button
                     key={day.id}
                     onClick={() => setActiveDay(day.id)}
-                    className={`flex-shrink-0 flex flex-col items-center justify-center w-18 h-20 rounded-2xl transition-all duration-300 relative overflow-hidden group ${activeDay === day.id
-                      ? `${currentTheme.bg} text-white shadow-xl scale-110 ring-2 ring-offset-2 ring-wedding-gold`
+                    className={`flex-shrink-0 flex flex-col items-center justify-center w-14 h-16 rounded-xl transition-all duration-300 relative overflow-hidden group ${activeDay === day.id
+                      ? `${currentTheme.bg} text-white shadow-xl scale-110 ring-2 ring-offset-1 ring-wedding-gold`
                       : "bg-white text-slate-400 border border-slate-100 shadow-sm hover:border-wedding-gold/50"
                       }`}
                   >
                     {activeDay === day.id && (
-                      <motion.div layoutId="activeDayDot" className="absolute top-2 right-2 w-1.5 h-1.5 bg-white rounded-full" />
+                      <motion.div layoutId="activeDayDot" className="absolute top-1.5 right-1.5 w-1 h-1 bg-white rounded-full" />
                     )}
-                    <span className="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-0.5">{day.day}</span>
-                    <span className="text-2xl font-heading font-bold leading-none">{day.id}</span>
-                    <span className="text-[9px] opacity-60 mt-1">{day.label.split(" ")[1]}</span>
+                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-80 mb-0.5">{day.day}</span>
+                    <span className="text-lg font-heading font-bold leading-none">{day.id}</span>
+                    <span className="text-[8px] opacity-60 mt-0.5">{day.label.split(" ")[1]}</span>
                   </button>
                 ))}
               </div>
@@ -473,17 +479,17 @@ export default function EventMiniApp() {
                   <button
                     key={day.id}
                     onClick={() => setActiveDay(day.id)}
-                    className={`flex-shrink-0 flex flex-col items-center justify-center w-18 h-20 rounded-2xl transition-all duration-300 relative overflow-hidden group ${activeDay === day.id
-                      ? `${currentTheme.bg} text-white shadow-xl scale-110 ring-2 ring-offset-2 ring-wedding-gold`
+                    className={`flex-shrink-0 flex flex-col items-center justify-center w-14 h-16 rounded-xl transition-all duration-300 relative overflow-hidden group ${activeDay === day.id
+                      ? `${currentTheme.bg} text-white shadow-xl scale-110 ring-2 ring-offset-1 ring-wedding-gold`
                       : "bg-white text-slate-400 border border-slate-100 shadow-sm hover:border-wedding-gold/50"
                       }`}
                   >
                     {activeDay === day.id && (
-                      <motion.div layoutId="activeMenuDayDot" className="absolute top-2 right-2 w-1.5 h-1.5 bg-white rounded-full" />
+                      <motion.div layoutId="activeMenuDayDot" className="absolute top-1.5 right-1.5 w-1 h-1 bg-white rounded-full" />
                     )}
-                    <span className="text-[10px] font-bold uppercase tracking-widest opacity-80 mb-0.5">{day.day}</span>
-                    <span className="text-2xl font-heading font-bold leading-none">{day.id}</span>
-                    <span className="text-[9px] opacity-60 mt-1">{day.label.split(" ")[1]}</span>
+                    <span className="text-[9px] font-bold uppercase tracking-widest opacity-80 mb-0.5">{day.day}</span>
+                    <span className="text-lg font-heading font-bold leading-none">{day.id}</span>
+                    <span className="text-[8px] opacity-60 mt-0.5">{day.label.split(" ")[1]}</span>
                   </button>
                 ))}
               </div>
@@ -551,4 +557,173 @@ function ChevronRight({ size = 24 }: { size?: number }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
   )
+}
+
+function LiveRitualTracker({ day, lang, currentTheme }: { day: string, lang: "en" | "mr", currentTheme: any }) {
+  const [status, setStatus] = useState<"live" | "upcoming" | "completed">("upcoming");
+  const [displayEvent, setDisplayEvent] = useState<any>(null);
+
+  useEffect(() => {
+    const checkTime = () => {
+      const now = new Date();
+      // We will parse the event times relative to the "Active Day".
+
+      const allEvents = [];
+      const year = new Date().getFullYear(); // Assume current year (2026)
+
+      // Flatten all events with absolute start/end times
+      // DAYS are 23, 24, 25, 26
+      const dayIds = ["23", "24", "25", "26"];
+
+      for (const dId of dayIds) {
+        const dayEvents = SCHEDULE_DATA[dId]?.[lang] || [];
+        for (const ev of dayEvents) {
+          const timeRange = parseTimeRange(ev.time); // returns minutes from midnight
+          if (!timeRange) continue;
+
+          // Construct start date
+          const start = new Date(year, 1, parseInt(dId)); // Month 1 is Feb
+          start.setHours(0, 0, 0, 0);
+          start.setMinutes(timeRange.start);
+
+          // Construct end date
+          const end = new Date(start);
+          const duration = (timeRange.end ? timeRange.end : timeRange.start + 60) - timeRange.start;
+          end.setMinutes(start.getMinutes() + duration);
+
+          allEvents.push({
+            ...ev,
+            startTime: start.getTime(),
+            endTime: end.getTime(),
+            dayId: dId
+          });
+        }
+      }
+
+      // Sort by time
+      allEvents.sort((a, b) => a.startTime - b.startTime);
+
+      const nowTime = now.getTime();
+      let foundLive = null;
+      let foundNext = null;
+
+      for (const ev of allEvents) {
+        if (nowTime >= ev.startTime && nowTime < ev.endTime) {
+          foundLive = ev;
+          break;
+        }
+        if (nowTime < ev.startTime && !foundNext) {
+          foundNext = ev;
+        }
+      }
+
+      if (foundLive) {
+        setDisplayEvent(foundLive);
+        setStatus("live");
+      } else if (foundNext) {
+        setDisplayEvent(foundNext);
+        setStatus("upcoming");
+      } else {
+        // If we are past all events, maybe show the very last one as "Concluded" or nothing?
+        // Or if we are before ALL events (e.g. it's Feb 13), show the first one.
+        if (allEvents.length > 0 && nowTime < allEvents[0].startTime) {
+          setDisplayEvent(allEvents[0]);
+          setStatus("upcoming");
+        } else {
+          setDisplayEvent(null);
+          setStatus("completed");
+        }
+      }
+    };
+
+    checkTime();
+    const interval = setInterval(checkTime, 30000); // Check every 30s
+    return () => clearInterval(interval);
+  }, [lang]); // Removed 'day' dependency so it doesn't reset on tab change
+
+  if (!displayEvent) return null;
+
+  const isLive = status === "live";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      // "Change color": Green/Red for Live, Default for Upcoming
+      className={`mx-1 mb-6 p-4 rounded-2xl border shadow-lg relative overflow-hidden transition-colors duration-500
+        ${isLive ? "bg-red-50 border-red-200 shadow-red-100" : "bg-white border-wedding-gold/30 shadow-sm"}
+      `}
+    >
+      <div className={`absolute top-0 left-0 w-1 h-full ${isLive ? "bg-red-500" : currentTheme.bg}`} />
+      <div className="flex justify-between items-start mb-2">
+        <div>
+          <h4 className={`text-[10px] font-black uppercase tracking-widest mb-1 ${isLive ? "text-red-600" : "text-amber-700"}`}>
+            {isLive ? "Happening Now" : "Upcoming Ritual"}
+          </h4>
+          <p className="text-[10px] text-slate-400 font-medium italic">
+            Never miss a ritual.
+          </p>
+        </div>
+
+        {/* Live Indicator Badge */}
+        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase flex items-center gap-1.5 shadow-sm
+                ${isLive ? "bg-red-600 text-white animate-pulse" : `${currentTheme.bg} text-white`}
+            `}>
+          {isLive && <span className="w-1.5 h-1.5 bg-white rounded-full animate-ping" />}
+          {isLive ? "LIVE" : "NEXT"}
+        </span>
+      </div>
+
+      <div className="flex items-center gap-4 mt-3">
+        <div className={`w-12 h-12 rounded-full flex items-center justify-center shrink-0 shadow-inner
+                ${isLive ? "bg-red-100 text-red-600" : `${currentTheme.soft} ${currentTheme.text}`}
+             `}>
+          <Clock size={20} />
+        </div>
+        <div>
+          <h3 className="text-lg font-heading font-bold text-slate-800 leading-tight">
+            {displayEvent.event}
+          </h3>
+          <div className="flex items-center gap-2 text-xs text-slate-500 mt-1 font-medium">
+            <Clock size={12} />
+            <span>{displayEvent.time}</span>
+          </div>
+          <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
+            <MapPin size={12} />
+            <span>{displayEvent.location}</span>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// Helper to parse time strings like "10:00 AM" into minutes from midnight
+function parseTimeRange(timeStr: string): { start: number, end?: number } | null {
+  try {
+    // Simple regex for "HH:MM AM/PM"
+    const matches = timeStr.toUpperCase().match(/(\d{1,2}):(\d{2})\s*(AM|PM)/g);
+    if (!matches) return null;
+
+    const parseSingle = (t: string) => {
+      const parts = t.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/);
+      if (!parts) return 0;
+      let h = parseInt(parts[1]);
+      const m = parseInt(parts[2]);
+      const ampm = parts[3];
+      if (ampm === "PM" && h !== 12) h += 12;
+      if (ampm === "AM" && h === 12) h = 0;
+      return h * 60 + m;
+    };
+
+    const start = parseSingle(matches[0]);
+    let end = undefined;
+    if (matches.length > 1) {
+      end = parseSingle(matches[1]);
+    }
+
+    return { start, end };
+  } catch (e) {
+    return null;
+  }
 }
